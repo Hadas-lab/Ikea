@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./Style.css">
+    <script src="UserDetails.js"></script>
+</head>
+<body onload="loadUserDetails()">
+    <div class="container">
+        <h2 id="heading" class="f"></h2>
+        <a onclick="showUpdate()">to update your datails</a>
+        <div class="form update" style="display:none;">
+                <br />
+                <input placeholder="Email Address" id="email" />
+                <br />
+                <input placeholder="Your Password" id="userPassword" type="password" />
+                <br />
+                <input placeholder="First Name" id="firstName" />
+                <br />
+                <input placeholder="Last Name" id="lastName" />
+                <br />
+                <br />
+                <button onclick="update()" style="width:100%">Update Details</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
