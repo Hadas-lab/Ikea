@@ -9,12 +9,15 @@
 <body onload="loadUserDetails()">
     <div class="container">
         <h2 id="heading" class="f"></h2>
-        <a onclick="showUpdate()">to update your datails</a>
-        <div class="form update" style="display:none;">
+        <a onclick="showUpdate()" id="toUpdate">to update your datails</a>
+        <div class="form update" style="display: none; width: 80%">
             <br />
             <input placeholder="Email Address" id="email" />
             <br />
-            <input placeholder="Your Password" id="userPassword" type="password" />
+            <input placeholder="Your Password" id="userPassword" type="password" oninput="setRate()"/>
+            <br /> 
+            <progress value="0" min="1" max="4" id="strengh-rate"></progress>
+            <br />
             <br />
             <input placeholder="First Name" id="firstName" />
             <br />

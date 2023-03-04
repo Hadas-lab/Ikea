@@ -80,7 +80,6 @@ function showSignIn(){
 
 async function setRate() {
     const password = document.getElementById("new-password").value;
-    console.log(password);
     const result = await fetch("api/password",
         {
             method: 'POST',
@@ -92,7 +91,6 @@ async function setRate() {
         }
     );
     const strenghRate = await result.json();
-    console.log(strenghRate);
     var progress = document.getElementById("strengh-rate");
     progress.value = strenghRate;
 
