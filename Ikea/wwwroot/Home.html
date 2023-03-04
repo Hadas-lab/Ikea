@@ -11,13 +11,11 @@
         <div class="form signin">
             <h2 class="heading">Existing Customers</h2>
             <p class="subheading">Sign into Next</p>
-            <!--  <form> -->
             <label for="email">Email Address</label>
-            <input id="email" name="email" value="hadas@gmail.com"> <!--type="email"-->
+            <input id="email" name="email" value="hadas@gmail.com"> 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value="12345678">
-            <button onclick="signIn()">Sign In</button><!--type="submit"--> <!--class="button"-->
-            <!--</form>-->
+            <button onclick="signIn()">Sign In</button>
             <p class="new-user">New user? <a onclick="showSignUp()">Register now</a></p>
         </div>
 
@@ -27,20 +25,18 @@
         <div class="form signup" style="display:none;">
             <h2 class="heading">New Customers</h2>
             <p class="subheading">Register with Next today</p>
-            <!--<form>  -->
             <label for="new-email">Email Address</label>
-            <input id="new-email" name="new-email" value="hadas@gmail.com"> <!--type="email"-->
+            <input id="new-email" name="new-email" value="hadas@gmail.com"> 
             <label for="new-password">Password</label>
             <input type="password" id="new-password" name="new-password" value="12345678" oninput="setRate()">
             <progress value="0" min="1" max="4" id="strengh-rate"></progress>
             <br />
             <br />
             <label for="first-name">First Name</label>
-            <input id="first-name" name="first-name" value="Hadas"><!--type="text"-->
+            <input id="first-name" name="first-name" value="Hadas">
             <label for="last-name">Last Name</label>
-            <input id="last-name" name="last-name" value="Ofek"><!--type="text"-->
-            <button onclick="signUp()">Sign Up</button><!--type="submit"--><!--class="button"-->
-            <!--</form>-->
+            <input id="last-name" name="last-name" value="Ofek">
+            <button onclick="signUp()">Sign Up</button>
             <p class="existing-user">Already have an account? <a onclick="showSignIn()">Sign In</a></p>
 
         </div>

@@ -15,7 +15,7 @@ namespace LogInSite.Controllers
         
 
         [HttpPost]
-        public ActionResult SingUp(User newUser)//why not [FromBody] ???
+        public ActionResult SingUp(User newUser)//how it works without [FromBody] ???
         {
             int strength = passwordService.passwordScore(newUser.Password);
             if (strength < 3)
