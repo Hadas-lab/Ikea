@@ -58,6 +58,30 @@ async function update() {
 
 
 function showUpdate() {
-    var signInDiv = document.querySelector('.update');
-    signInDiv.style.display = 'block';
+    var updateDiv = document.querySelector('.update');
+    updateDiv.style.display = 'block';
+
+    var toUpdateA = document.getElementById('toUpdate');
+    toUpdateA.style.display = 'none';
+
+    
+}
+
+
+async function setRate() {
+    const password = document.getElementById("userPassword").value;
+    const result = await fetch("api/password",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(password)
+        }
+    );
+    const strenghRate = await result.json();
+    var progress = document.getElementById("strengh-rate");
+    progress.value = strenghRate;
+
 }
