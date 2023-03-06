@@ -11,7 +11,7 @@ namespace Services
     {
         public int passwordScore(string password)
         {
-            return Zxcvbn.Core.EvaluatePassword(password).Score;//how I should have to know it??
+            return Zxcvbn.Core.EvaluatePassword(password).Score;
         }
     }
 }

@@ -13,7 +13,8 @@
     document.getElementById("firstName").value = firstName;
     document.getElementById("lastName").value = lastName;
 
-    const welcome = `Hello ${firstName}. id: ${id}`;
+    const welcome = `Hello ${firstName}  ${lastName}`;
+
     document.getElementById("heading").innerHTML = welcome;
 
 }

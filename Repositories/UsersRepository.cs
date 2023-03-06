@@ -5,9 +5,7 @@ namespace Repositories
 {
     public class UsersRepository
     {
-
-        static string filePath = "./users.txt";//"E:\\web api\\my app\\LogInSite\\Repositories\\users.txt";
-
+        static string filePath = "../Repositories/users.txt";
         public User SingUp(User newUser)
         {
             int numberOfUsers = System.IO.File.ReadLines(filePath).Count();

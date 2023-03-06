@@ -1,4 +1,4 @@
-﻿ Add a background color and center the content 
+﻿Add a background color and center the content
 body {
     background-color: #F7F7F7;
     display: flex;
@@ -7,7 +7,7 @@ body {
     height: 100vh;
 }
 
- Set the font family and size for the headings 
+Set the font family and size for the headings
 h2, h4 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
@@ -15,7 +15,7 @@ h2, h4 {
     margin: 0;
 }
 
- Add some margin to the top and bottom of the headings 
+Add some margin to the top and bottom of the headings
 h2 {
     margin-bottom: 1rem;
     margin-top: 0;
@@ -41,7 +41,7 @@ input {
     background-color: #F2F2F2;
 }
 
- Style the button 
+Style the button
 button {
     background-color: #F3D963;
     color: white;
@@ -54,11 +54,11 @@ button {
     cursor: pointer;
 }
 
-    button:hover {
-        background-color: #E7C848;
-    }
+button:hover {
+    background-color: #E7C848;
+}
 
- Style the link 
+Style the link
 a {
     color: #6A6A6A;
     text-decoration: none;
@@ -67,35 +67,35 @@ a {
     font-weight: 400;
 }
 
-    a:hover {
-        color: #424242;
-    }
+a:hover {
+    color: #424242;
+}
 
- Style the sign up form 
+Style the sign up form
 #singUp {
     visibility: hidden;
 }
 
-    #singUp input{
-        margin-bottom: 1rem;
+#singUp input {
+    margin-bottom: 1rem;
+}
+
+#singUp button {
+    background-color: #0070C0;
+}
+
+    #singUp button:hover {
+        background-color: #0060A8;
     }
 
-    #singUp button {
-        background-color: #0070C0;
-    }
 
-        #singUp button:hover {
-            background-color: #0060A8;
-        }
-
-
- Define font styles 
+Define font styles
 .f {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
 }
 
- Define color palette 
+Define color palette
 :root {
     --primary-color: #1C1C1E;
     --secondary-color: #FFFFFF;
@@ -103,7 +103,7 @@ a {
     --gray-color: #B2B2B2;
 }
 
- Define global styles 
+Define global styles
 body {
     margin: 0;
     background-color: var(--primary-color);
@@ -124,7 +124,7 @@ h4 {
 
 /*input[type="text"],
 input[type="password"] */
-input{
+input {
     border: none;
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -160,7 +160,7 @@ a {
         color: #007FFF;
     }
 
- Define layout styles 
+Define layout styles
 .container {
     display: flex;
     justify-content: center;
@@ -188,7 +188,7 @@ a {
     width: 20px;
 }
 
- Global styles 
+Global styles
 * {
     box-sizing: border-box;
     margin: 0;
@@ -247,7 +247,7 @@ label {
 /*input[type="email"],
 input[type="password"],
 input[type="text"] */
-input{
+input {
     background-color: #333;
     color: #fff;
     border: none;
@@ -257,14 +257,14 @@ input{
     font-size: 16px;
 }
 
-input:focus , input:focus{
-    outline: none;
-    box-shadow: 0 0 5px #fff;
-}
+    input:focus, input:focus {
+        outline: none;
+        box-shadow: 0 0 5px #fff;
+    }
 
-button{/*????*/
-/*    background-color: #0077c0;
-*/    color: #fff;
+button { /*????*/
+    /*    background-color: #0077c0;
+*/ color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -273,9 +273,9 @@ button{/*????*/
     transition: all 0.2s ease;
 }
 
-button:hover {
-    background-color: #0066a8;
-}
+    button:hover {
+        background-color: #0066a8;
+    }
 
 .new-user,
 .existing-user {
