@@ -10,11 +10,6 @@ namespace LogInSite.Controllers
     {
         PasswordService passwordService = new();
         
-        [HttpGet]
-        public string Get()
-        {
-            return "hello  hadas";
-        }
 
         [HttpPost]
         public async Task<int> Post([FromBody] string value)
