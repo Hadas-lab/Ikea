@@ -9,7 +9,7 @@ namespace Services
 {
     public class PasswordService
     {
-        public int passwordScore(string password)
+        public async Task<int> passwordScore(string password)
         {
             return Zxcvbn.Core.EvaluatePassword(password).Score;
         }

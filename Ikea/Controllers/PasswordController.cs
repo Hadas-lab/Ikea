@@ -17,9 +17,9 @@ namespace LogInSite.Controllers
         }
 
         [HttpPost]
-        public int Post([FromBody] string value)
+        public async Task<int> Post([FromBody] string value)
         {
-            int score = passwordService.passwordScore(value);
+            int score = await passwordService.passwordScore(value);
             return score;
         }
     }

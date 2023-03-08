@@ -15,9 +15,9 @@ namespace LogInSite.Controllers
         
 
         [HttpPost]
-        public ActionResult SingUp(User newUser)//how it works without [FromBody] ???
+        public async Task<ActionResult> SingUp(User newUser)//how it works without [FromBody] ???
         {
-            int strength = passwordService.passwordScore(newUser.Password);
+            int strength = await passwordService.passwordScore(newUser.Password);
             if (strength < 3)
             {
                 return StatusCode(601);//it is possible to send a message and get it in client through res.test()
@@ -26,14 +26,14 @@ namespace LogInSite.Controllers
             {
                 return StatusCode(602);
             }
-            User user = usersService.SingUp(newUser);
+            User user = await usersService.SingUp(newUser);
             return Ok(user);
         }
 
-        [HttpPost("signIn")] 
-        public ActionResult SignIn([FromBody] User user)
+        [HttpPost("signIn")]
+        public async Task<ActionResult> SignIn([FromBody] User user)
         {
-            User userFound = usersService.SignIn(user);
+            User userFound =await usersService.SignIn(user);
             if (userFound==null)
                 return NoContent();
             return Ok(userFound);
@@ -41,9 +41,9 @@ namespace LogInSite.Controllers
 
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] User user)
+        public async Task Put(int id, [FromBody] User user)
         {
-            usersService.Put(id, user);
+            await usersService.Put(id, user);
 
         }
 
