@@ -1,22 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Entities
+namespace Entities;
+
+public partial class User
 {
-    public class User
-    {
-        public int Id { get;set;}
+    public int Id { get; set; }
 
-        [EmailAddress(ErrorMessage = "Email not valid")]
-        public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
-        [StringLength(20, ErrorMessage = "Password length must be between 8 to 20", MinimumLength = 8)]
-        public string Password { get; set; }
-        
-        public string? FirstName { get; set; }
-        
-        public string? LastName { get; set; }
+    public string Password { get; set; } = null!;
 
-    }
+    public string FirstName { get; set; } = null!;
 
-
+    public string LastName { get; set; } = null!;
 }

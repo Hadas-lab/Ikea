@@ -8,8 +8,12 @@ namespace LogInSite.Controllers
     [ApiController]
     public class PasswordController : ControllerBase
     {
-        PasswordService passwordService = new();
-        
+        IPasswordService passwordService;
+
+        public PasswordController(IPasswordService passwordService) 
+        {
+            this.passwordService = passwordService;
+        }
 
         [HttpPost]
         public async Task<int> Post([FromBody] string value)

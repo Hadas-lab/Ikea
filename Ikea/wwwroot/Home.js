@@ -11,7 +11,7 @@
         FirstName: firstName,
         LastName: lastName
     }
-    const res = await fetch("api/user",
+    const res = await fetch("api/users",
         {
             method: 'POST',
             headers: {
@@ -44,7 +44,7 @@ async function signIn() {
         "Email": email,
         "Password": password
     }
-    const res = await fetch("api/user/signIn",
+    const res = await fetch("api/users/signIn",
         {
             method: 'POST',
             headers: {

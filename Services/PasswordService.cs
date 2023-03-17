@@ -7,7 +7,7 @@ using Zxcvbn;
 
 namespace Services
 {
-    public class PasswordService
+    public class PasswordService : IPasswordService
     {
         public async Task<int> passwordScore(string password)
         {

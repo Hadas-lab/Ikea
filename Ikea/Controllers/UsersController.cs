@@ -8,11 +8,17 @@ namespace LogInSite.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        UsersService usersService = new();
-        PasswordService passwordService = new();
-        
+        IUsersService usersService;
+        IPasswordService passwordService;
+
+        public UsersController(IUsersService usersService, IPasswordService passwordService)
+        {
+            this.usersService = usersService;
+            this.passwordService = passwordService;
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> SingUp(User newUser)//how it works without [FromBody] ???

@@ -3,9 +3,16 @@ using Repositories;
 
 namespace Services
 {
-    public class UsersService
+    public class UsersService : IUsersService
     {
-        UsersRepository usersRepository = new();
+        IUsersRepository usersRepository;
+
+        public UsersService(IUsersRepository usersRepository)
+        {
+            this.usersRepository = usersRepository;
+        }
+
+
         public async Task<User> SingUp(User newUser)
         {
             User user = await usersRepository.SingUp(newUser);

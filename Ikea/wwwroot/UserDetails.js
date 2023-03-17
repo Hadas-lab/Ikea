@@ -38,7 +38,7 @@ async function update() {
         LastName: lastName
     }
 
-    const res = await fetch(`api/user/${id}`,
+    const res = await fetch(`api/users/${id}`,
         {
             method: 'PUT',
             headers: {
