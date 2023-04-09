@@ -8,17 +8,17 @@ namespace LogInSite.Controllers
     [ApiController]
     public class PasswordController : ControllerBase
     {
-        IPasswordService passwordService;
+        IPasswordService _passwordService;
 
         public PasswordController(IPasswordService passwordService) 
         {
-            this.passwordService = passwordService;
+            _passwordService = passwordService;
         }
 
         [HttpPost]
         public async Task<int> Post([FromBody] string value)
         {
-            int score = await passwordService.passwordScore(value);
+            int score = await _passwordService.passwordScore(value);
             return score;
         }
     }

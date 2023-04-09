@@ -10,36 +10,40 @@ namespace LogInSite.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUsersService usersService;
-        IPasswordService passwordService;
+        IUserService _usersService;
+        IPasswordService _passwordService;
 
-        public UsersController(IUsersService usersService, IPasswordService passwordService)
+        public UsersController(IUserService usersService, IPasswordService passwordService)
         {
-            this.usersService = usersService;
-            this.passwordService = passwordService;
+            _usersService = usersService;
+            _passwordService = passwordService;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult> SingUp(User newUser)//how it works without [FromBody] ???
+        public async Task<ActionResult> SingUp([FromBody] User newUser)//how it works without [FromBody] ???
         {
-            int strength = await passwordService.passwordScore(newUser.Password);
-            if (strength < 3)
+            int strength = await _passwordService.passwordScore(newUser.Password);
+            if (strength < 2)
             {
-                return StatusCode(601);//it is possible to send a message and get it in client through res.test()
+                return StatusCode(601);
             }
-            if(strength < 4)
-            {
-                return StatusCode(602);
-            }
-            User user = await usersService.SingUp(newUser);
+            //if (strength < 3)
+            //{
+            //    return StatusCode(601);
+            //}
+            //if(strength < 4)
+            //{
+            //    return StatusCode(602);
+            //}
+            User user = await _usersService.SingUp(newUser);
             return Ok(user);
         }
 
         [HttpPost("signIn")]
-        public async Task<ActionResult> SignIn([FromBody] User user)
+        public async Task<ActionResult> SignIn([FromBody] DemoUser user)//( User user)
         {
-            User userFound =await usersService.SignIn(user);
+            User userFound =await _usersService.SignIn(user);
             if (userFound==null)
                 return NoContent();
             return Ok(userFound);
@@ -47,10 +51,15 @@ namespace LogInSite.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] User user)
+        public async Task<ActionResult<User>> Put(int id, [FromBody] User user)
         {
-            await usersService.Put(id, user);
-
+            int strength = await _passwordService.passwordScore(user.Password);
+            if (strength < 2)
+            {
+                return StatusCode(601);
+            }
+            await _usersService.Put(id, user);
+            return Ok(user);
         }
 
     }
