@@ -21,9 +21,9 @@ namespace Services
         {
             return await _orderRepository.AddOrder(newOrder);
         }
-        public async Task<List<Order>> GetAllOrders()
+        public async Task<List<Order>> GetAllOrders(int page)
         {
-            return await _orderRepository.GetAllOrders();
+            return await _orderRepository.GetAllOrders(page);
         }
 
     }

@@ -16,7 +16,9 @@ public partial class Product
 
     public string Description { get; set; } = null!;
 
-    public virtual Category Category { get; set; } = null!;
-    [JsonIgnore]
+    public string ImagePath { get; set; } = null!;
+
+    public virtual Category? Category { get; set; } = null!;
+
     public virtual ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
 }

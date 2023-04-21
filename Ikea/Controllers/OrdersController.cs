@@ -15,11 +15,10 @@ namespace Ikea.Controllers
             _orderService = orderService;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<List<Order>>> Get()
+        public async Task<ActionResult<List<Order>>> Get([FromQuery] int page)
         {
-            List<Order> products = await _orderService.GetAllOrders();
+            List<Order> products = await _orderService.GetAllOrders(page);
             return products == null ? NoContent() :Ok(products);
         }
 

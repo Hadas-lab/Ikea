@@ -5,6 +5,6 @@ namespace Repositories
     public interface IProductRepository
     {
         Task<Product> AddProduct(Product newProduct);
-        Task<List<Product>> GetAllProducts();
+        Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, int[] categoryIds);
     }
 }

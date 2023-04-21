@@ -1,9 +1,10 @@
-//Data Source=SRV2\PUPILS;Initial Catalog=Ikea;Integrated Security=True
-//"Server=TETELAP\\SQLEXPRESS;Database=Ikea;Trusted_Connection=True;TrustServerCertificate=True");
+
+
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,10 @@ builder.Services.AddTransient<IProductService, ProductService>();
 
 builder.Services.AddTransient<IPasswordService, PasswordService>();
 
+
+//seminar
+//builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("SRV2\\PUPILS; Initial Catalog = Ikea; Integrated Security = True"));
+//home
 builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("Server=TETELAP\\\\SQLEXPRESS;Database=Ikea;Trusted_Connection=True;TrustServerCertificate=True"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

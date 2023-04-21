@@ -43,12 +43,11 @@ namespace LogInSite.Controllers
         [HttpPost("signIn")]
         public async Task<ActionResult> SignIn([FromBody] DemoUser user)//( User user)
         {
-            User userFound =await _usersService.SignIn(user);
-            if (userFound==null)
+            User userFound = await _usersService.SignIn(user);
+            if (userFound == null)
                 return NoContent();
             return Ok(userFound);
         }
-
 
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> Put(int id, [FromBody] User user)

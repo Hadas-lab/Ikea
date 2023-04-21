@@ -24,9 +24,9 @@ namespace Repositories
             return newOrder;
         }
 
-        public async Task<List<Order>> GetAllOrders()
+        public async Task<List<Order>> GetAllOrders(int page)
         {
-            return await _ikeaContext.Orders.ToListAsync();
+            return await _ikeaContext.Orders.Include(o => o.User).ToListAsync();
         }
     }
 }

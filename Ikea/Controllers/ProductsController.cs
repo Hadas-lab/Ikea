@@ -19,9 +19,9 @@ namespace Ikea.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> Get()
+        public async Task<ActionResult<List<Product>>> Get([FromQuery] int? minPrice, [FromQuery] int? maxPrice, [FromQuery] string? userInput, [FromQuery] int[] categoryIds )
         {
-            List<Product> products = await _productService.GetAllProducts();
+            List<Product> products = await _productService.GetAllProducts(minPrice,maxPrice,userInput, categoryIds);
             return products == null ? NoContent() : Ok(products);
         }
 
