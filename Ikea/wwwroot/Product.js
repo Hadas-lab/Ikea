@@ -17,7 +17,6 @@ async function fetchProduct() {
         },
     })
     const products = await res.json();
-    console.log(products);
     return products;
 }
 
@@ -27,8 +26,8 @@ function drowProducts(products) {
 }
 
 function designProduct(product) {
-    const card = createCard('#template-card');
-    card.querySelector('.image').src = product.imagePath;
+    const card = createCard('#template-card');  
+    card.querySelector('.image').src = `Images/Products/${product.imagePath}`;
     card.querySelector('h1').innerText = product.name;
     card.querySelector('.price').innerText = `${product.price}$`;
     card.querySelector('.description').innerText = product.description;
