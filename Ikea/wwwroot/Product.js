@@ -1,5 +1,6 @@
 ﻿
 function loadData() {
+    // commit
     loadProducts();
     loadCategories();
 }
