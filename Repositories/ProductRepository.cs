@@ -31,7 +31,8 @@ namespace Repositories
                 (maxPrice == null || product.Price <= maxPrice) &&
                 (userInput == null || product.Description.Contains(userInput)) &&
                 (categoryIds.Length == 0 || categoryIds.Contains(product.Category.Id))
-            );
+            ); 
+
             return await query.ToListAsync();
         }
     }

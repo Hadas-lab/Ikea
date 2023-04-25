@@ -25,6 +25,8 @@ function drowProducts(products) {
     cards.forEach(card => document.body.appendChild(card))
 }
 
+function helloWorld() { }
+
 function designProduct(product) {
     const card = createCard('#template-card');  
     card.querySelector('.image').src = `Images/Products/${product.imagePath}`;
