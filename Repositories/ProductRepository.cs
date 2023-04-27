@@ -24,13 +24,13 @@ namespace Repositories
             return newProduct;
         }
         
-        public async Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, int[] categoryIds)
+        public async Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, List<int> categoryIds)
         {
             var query = _ikeaContext.Products.Where(product =>
                 (minPrice == null || product.Price >= minPrice) &&
                 (maxPrice == null || product.Price <= maxPrice) &&
-                (userInput == null || product.Description.Contains(userInput)) &&
-                (categoryIds.Length == 0 || categoryIds.Contains(product.Category.Id))
+                (userInput == null || product.Description.Contains(userInput) || product.Name.Contains(userInput)) &&
+                (categoryIds.Count == 0 || categoryIds.Contains(product.CategoryId))
             ); 
 
             return await query.ToListAsync();

@@ -24,7 +24,7 @@ namespace Services
         }
 
 
-        public async Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, int[] categoryIds)
+        public async Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, List<int> categoryIds)
         {
             return await _productRepository.GetAllProducts(minPrice, maxPrice, userInput, categoryIds);
         }

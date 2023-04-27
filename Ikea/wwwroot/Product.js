@@ -1,9 +1,13 @@
 ﻿
 function loadData() {
-    // commit
     loadProducts();
     loadCategories();
+    updateBagCount()
 }
+
+//const body = document.querySelector("body")
+//const body = document.body
+//body.addEventListener("load", loadData, false);
 
 async function loadProducts() {
     const products = await fetchProduct();
@@ -22,18 +26,20 @@ async function fetchProduct() {
 }
 
 function drowProducts(products) {
+    const container = document.getElementById('product-list');
+    container.innerHTML = null;
     const cards = products.map(product => designProduct(product));
-    cards.forEach(card => document.body.appendChild(card))
+    cards.forEach(card => container.appendChild(card))
 }
 
-function helloWorld() { }
 
 function designProduct(product) {
-    const card = createCard('#template-card');  
+    const card = createCard('#template-card');
     card.querySelector('.image').src = `Images/Products/${product.imagePath}`;
     card.querySelector('h1').innerText = product.name;
     card.querySelector('.price').innerText = `${product.price}$`;
     card.querySelector('.description').innerText = product.description;
+    card.querySelector('button').addEventListener('click', () => addProduct(product));
     return card;
 }
 
@@ -49,7 +55,7 @@ async function loadCategories() {
     drowCategories(categories);
 }
 
-async function fetchCategories(){
+async function fetchCategories() {
     const res = await fetch('api/categories', {
         mehtod: 'Get',
         headers: {
@@ -60,17 +66,64 @@ async function fetchCategories(){
     return categories;
 }
 
-function drowCategories(categories) {
-    const designedCategories = categories.map(category => designCategory(category));
-    designedCategories.forEach(category => document.querySelector('#categoryList').appendChild(category));
+function createUrl(selectedCategories, name, minPrice, maxPrice) {
+    let url = `?`;
+    if (selectedCategories.length > 0)
+        url += `categoryIds=${selectedCategories.join('&categoryIds=')}&`;
+    if (name)
+        url += `userInput=${name}&`
+    if (minPrice)
+        url += `minPrice=${minPrice}&`
+    if (maxPrice)
+        url += `maxPrice=${maxPrice}&`
+    return url;
 }
 
+async function fetchFilteredProducts(selectedCategories, name, minPrice, maxPrice) {
+    const url = createUrl(selectedCategories, name, minPrice, maxPrice);
+    const res = await fetch(`api/products${url}`, {
+        mehtod: 'Get',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    });
+    const products = await res.json();
+    drowProducts(products);
+}
+
+function drowCategories(categories) {
+    const designedCategories = categories.map(category => designCategory(category));
+    designedCategories.forEach(category => document.querySelector('#category-list').appendChild(category));
+}
+
+function filterProducts() {
+    const category = document.getElementsByClassName('category-option');
+    const selectedCategories = [];
+    for (let i = 0; i < category.length; i++)
+        if (category[i].checked)
+            selectedCategories.push(category[i].value)
+    const name = document.getElementById('nameSearch').value;
+    const minPrice = document.getElementById('minPrice').value;
+    const maxPrice = document.getElementById('maxPrice').value;
+    fetchFilteredProducts(selectedCategories, name, minPrice, maxPrice);
+}
 
 function designCategory(category) {
     const card = createCard('#template-category');
-    card.querySelector('.OptionName').innerText = category.name;
+    card.querySelector('.option-name').innerText = category.name;
+    card.querySelector('.category-option').value = category.id;
+    card.querySelector('.category-option').addEventListener('change', filterProducts);
     return card;
 }
 
-//window.addEventListener('load', fetchProduct());
-//document.body.addEventListener('load', fetchProduct());
+function updateBagCount() {
+    const bag = JSON.parse(localStorage.getItem('bag') || '[]');
+    document.getElementById('items-count-text').innerText = bag.length; 
+}
+
+function addProduct(product) {
+    const bag = JSON.parse(localStorage.getItem('bag') || '[]');
+    bag.push(product);
+    localStorage.setItem('bag', JSON.stringify(bag));
+    updateBagCount();    
+}

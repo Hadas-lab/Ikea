@@ -26,9 +26,9 @@ builder.Services.AddTransient<IPasswordService, PasswordService>();
 
 
 //seminar
-builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("SRV2\\PUPILS; Initial Catalog = Ikea; Integrated Security = True"));
+//builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("SRV2\\PUPILS; Initial Catalog = Ikea; Integrated Security = True"));
 //home
-//builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("Server=TETELAP\\\\SQLEXPRESS;Database=Ikea;Trusted_Connection=True;TrustServerCertificate=True"));
+builder.Services.AddDbContext<IkeaContext>(options => options.UseSqlServer("Server=TETELAP\\\\SQLEXPRESS;Database=Ikea;Trusted_Connection=True;TrustServerCertificate=True"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
