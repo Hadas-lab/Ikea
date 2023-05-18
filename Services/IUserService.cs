@@ -1,11 +1,11 @@
 ﻿using Entities;
-
+using DTO;
 namespace Services
 {
     public interface IUserService
     {
-        Task<User> Put(int id, User user);
-        Task<User?> SignIn(DemoUser user);
+        Task<bool> Put(int id, User user);
+        Task<User?> SignIn(UserLoginDto user);
         Task<User> SingUp(User newUser);
     }
 }

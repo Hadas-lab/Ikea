@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using DTO;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private IkeaContext _ikeaContext;
+        private readonly IkeaContext _ikeaContext;
+
 
         public ProductRepository(IkeaContext ikeaContext)
         {
@@ -31,9 +33,13 @@ namespace Repositories
                 (maxPrice == null || product.Price <= maxPrice) &&
                 (userInput == null || product.Description.Contains(userInput) || product.Name.Contains(userInput)) &&
                 (categoryIds.Count == 0 || categoryIds.Contains(product.CategoryId))
-            ); 
-
+            ).Include(p => p.Category).OrderByDescending(p => p.Name);
             return await query.ToListAsync();
+        }
+
+        public async Task<Product> GetProductById(int id)
+        {
+            return await _ikeaContext.Products.FirstAsync(p => p.Id == id);
         }
     }
 }

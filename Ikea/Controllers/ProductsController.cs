@@ -1,8 +1,8 @@
-﻿using Entities;
+﻿using AutoMapper;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using DTO;
 
 namespace Ikea.Controllers
 {
@@ -10,25 +10,32 @@ namespace Ikea.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private IProductService _productService;
+        private readonly IProductService _productService;
+        
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         } 
 
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> Get([FromQuery] int? minPrice, [FromQuery] int? maxPrice, [FromQuery] string? userInput, [FromQuery] List<int> categoryIds )
+        public async Task<ActionResult<List<ProductDto>>> Get([FromQuery] int? minPrice, [FromQuery] int? maxPrice, [FromQuery] string? userInput, [FromQuery] List<int> categoryIds )
         {
             List<Product> products = await _productService.GetAllProducts(minPrice,maxPrice,userInput, categoryIds);
-            return products == null ? NoContent() : Ok(products);
+            List<ProductDto> productDtos = _mapper.Map<List<Product>, List<ProductDto>>(products);
+            return productDtos == null ? NoContent() : Ok(productDtos);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> Post([FromBody] Product newProduct)
+        public async Task<ActionResult<ProductDto>> Post([FromBody] ProductDto newProductDto)
         {
-            return await _productService.AddProduct(newProduct);
+            
+            Product newProduct = _mapper.Map<ProductDto, Product>(newProductDto);
+            Product p =  await _productService.AddProduct(newProduct);
+            return _mapper.Map<Product, ProductDto>(p);
         }
 
     }

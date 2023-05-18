@@ -1,4 +1,5 @@
 ﻿using Entities;
+using DTO;
 
 namespace Repositories
 {
@@ -6,5 +7,6 @@ namespace Repositories
     {
         Task<Product> AddProduct(Product newProduct);
         Task<List<Product>> GetAllProducts(int? minPrice, int? maxPrice, string? userInput, List<int> categoryIds);
+        Task<Product> GetProductById(int id);
     }
 }

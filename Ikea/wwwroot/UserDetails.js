@@ -2,12 +2,12 @@
 async function loadUserDetails() {
     try {
         const user = JSON.parse(sessionStorage.getItem('user'));
-        const { id, email, password, firstName, lastName } = user;
+        const { email, password, firstName, lastName } = user;
         document.getElementById("email").value = email;
         document.getElementById("userPassword").value = password.replace(/\s+/g, '');
         document.getElementById("firstName").value = firstName;
         document.getElementById("lastName").value = lastName;
-        document.getElementById("heading").innerHTML = `Hello ${firstName} ${lastName}`;
+        document.getElementById("heading").innerText = `Hello ${firstName} ${lastName}`;
         await setRate();
     } catch (error) {
         console.error(error);
@@ -16,7 +16,7 @@ async function loadUserDetails() {
 }
 
 function shoping() {
-    window.location.assign("./Product.html");
+    window.location.assign("./Products.html");
 }
 
 async function update() {

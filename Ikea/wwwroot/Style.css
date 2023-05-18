@@ -316,3 +316,8 @@ a {
         opacity: 1;
     }
 }
+
+.error{
+    color: red;
+    font-size:large
+}

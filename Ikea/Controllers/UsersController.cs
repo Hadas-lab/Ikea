@@ -2,6 +2,8 @@
 using Services;
 using Entities;
 using static System.Net.WebRequestMethods;
+using DTO;
+using AutoMapper;
 
 namespace LogInSite.Controllers
 {
@@ -10,39 +12,30 @@ namespace LogInSite.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUserService _usersService;
-        IPasswordService _passwordService;
+        private readonly IUserService _usersService;
+        private readonly IMapper _mapper;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUserService usersService, IPasswordService passwordService)
+        public UsersController(IUserService usersService, IMapper mapper, ILogger<UsersController> logger)
         {
             _usersService = usersService;
-            _passwordService = passwordService;
+            _mapper = mapper;
+            _logger = logger;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult> SingUp([FromBody] User newUser)//how it works without [FromBody] ???
+        public async Task<ActionResult> SingUp([FromBody] User newUser) 
         {
-            int strength = await _passwordService.passwordScore(newUser.Password);
-            if (strength < 2)
-            {
-                return StatusCode(601);
-            }
-            //if (strength < 3)
-            //{
-            //    return StatusCode(601);
-            //}
-            //if(strength < 4)
-            //{
-            //    return StatusCode(602);
-            //}
             User user = await _usersService.SingUp(newUser);
-            return Ok(user);
+            return user == null? NoContent() :Ok(user);
         }
 
         [HttpPost("signIn")]
-        public async Task<ActionResult> SignIn([FromBody] DemoUser user)//( User user)
+        public async Task<ActionResult> SignIn([FromBody] UserLoginDto user)//I need the userDto along the way???
         {
+            //_logger.LogInformation($"Login attempt with User Name {user.Email} and password {user.Password}");
+            //_logger.LogError("Error in your app");
             User userFound = await _usersService.SignIn(user);
             if (userFound == null)
                 return NoContent();
@@ -52,13 +45,9 @@ namespace LogInSite.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> Put(int id, [FromBody] User user)
         {
-            int strength = await _passwordService.passwordScore(user.Password);
-            if (strength < 2)
-            {
-                return StatusCode(601);
-            }
-            await _usersService.Put(id, user);
-            return Ok(user);
+            
+            bool success = await _usersService.Put(id, user);
+            return success==true ? Ok(user): StatusCode(400);
         }
 
     }

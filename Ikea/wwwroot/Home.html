@@ -13,11 +13,12 @@
         <div class="form signin">
             <h2 class="heading">Existing Customers</h2>
             <p class="subheading">Sign into Ikea</p>
+            <p id="signin-error" class="error"></p>
             <label for="email">Email Address</label>
-            <input id="email" name="email" value="hadas@gmail.com"> 
+            <input id="email" name="email" value="hadas@gmail.com">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value="Hadas12">
-            <button onclick="signIn()">Sign In</button>
+            <button onclick="signIn()" id="sign-in-button">Sign In</button>
             <p class="new-user">New user? <a onclick="showSignUp()">Register now</a></p>
         </div>
 
@@ -27,18 +28,19 @@
         <div class="form signup" style="display:none;">
             <h2 class="heading">New Customers</h2>
             <p class="subheading">Register with Ikea today</p>
+            <p id="signup-error" class="error"></p>
             <label for="new-email">Email Address</label>
-            <input id="new-email" name="new-email" value="hadas@gmail.com"> 
+            <input id="new-email" name="new-email" value="hadas@gmail.com">
             <label for="new-password">Password</label>
             <input type="password" id="new-password" name="new-password" value="Hadas12" oninput="setRate()">
-            <progress value="0" min="1" max="4" id="strengh-rate"></progress>
+            <progress value="0" min="1" max="4" id="strength-rate"></progress>
             <br />
             <br />
             <label for="first-name">First Name</label>
             <input id="first-name" name="first-name" value="Hadas">
             <label for="last-name">Last Name</label>
             <input id="last-name" name="last-name" value="Ofek">
-            <button onclick="signUp()">Sign Up</button>
+            <button onclick="signUp()" id="sign-up-button">Sign Up</button>
             <p class="existing-user">Already have an account? <a onclick="showSignIn()">Sign In</a></p>
 
         </div>

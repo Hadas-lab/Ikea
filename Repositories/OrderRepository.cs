@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private IkeaContext _ikeaContext;
+        private readonly IkeaContext _ikeaContext;
 
         public OrderRepository(IkeaContext ikeaContext)
         {
@@ -26,7 +27,7 @@ namespace Repositories
 
         public async Task<List<Order>> GetAllOrders(int page)
         {
-            return await _ikeaContext.Orders.Include(o => o.User).ToListAsync();
+            return await _ikeaContext.Orders.Include(o => o.OrderItems).ToListAsync();
         }
     }
 }

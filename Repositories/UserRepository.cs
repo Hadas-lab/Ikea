@@ -5,23 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTO;
 
 namespace Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private IkeaContext _ikeaContext;
+        private readonly IkeaContext _ikeaContext;
+
 
         public UserRepository(IkeaContext ikeaContext)
         {
             _ikeaContext = ikeaContext;
         }
 
-        public async Task<User?> SignIn(DemoUser user)
+        public async Task<User?> SignIn(UserLoginDto user)
         {
-            
             User userFound = await _ikeaContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email && u.Password == user.Password);
             return userFound;
+        }
+
+        public async Task<bool> UniqueEmail(String email)
+        {
+            User user = await _ikeaContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return user == null;
         }
 
         public async Task<User> AddUser(User newUser)
@@ -31,11 +38,11 @@ namespace Repositories
             return newUser;
         }
 
-        public async Task<User> Update(User user)
+        public async Task<bool> Update(User user)
         {
             _ikeaContext.Users.Update(user);
             await _ikeaContext.SaveChangesAsync();
-            return user;
+            return true;
         }
 
     }

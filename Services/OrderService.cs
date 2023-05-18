@@ -10,15 +10,25 @@ namespace Services
 {
     public class OrderService : IOrderService
     {
-        private IOrderRepository _orderRepository;
-
-        public OrderService(IOrderRepository orderRepository)
+        private readonly IOrderRepository _orderRepository;
+        private readonly IProductRepository _productRepository;
+           
+        public OrderService(IOrderRepository orderRepository, IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<Order> AddOrder(Order newOrder)
         {
+            int sum = 0;
+            foreach (OrderItem oi in newOrder.OrderItems)
+            {
+                Product p = await _productRepository.GetProductById(oi.ProductId);
+                sum+=p.Price;
+            }
+            if (sum != newOrder.Sum)
+                throw new Exception("mismatch with order sum");
             return await _orderRepository.AddOrder(newOrder);
         }
         public async Task<List<Order>> GetAllOrders(int page)
